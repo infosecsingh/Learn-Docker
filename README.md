@@ -96,3 +96,100 @@ docker run -d -p 8080:80 --name=my-nginx nginx
 - **image:** Mentioned the image. 
 
 **There are more arguments available on Docker official website, you may read the documentation -- > [docs.docker.com](https://docs.docker.com/reference/cli/docker/container/run/)**
+
+### Let's learn Dockerfile. 
+So far, you learnt docker image vs docker container. Now lets deep dive into Dockerfile concept:
+- A Dockerfile is a text file containing a set of instructions to build a Docker image. It's like a recipe that Docker follows to package your application and its dependencies into a portable container.
+
+**Let's break it down step by step:**
+
+#### Basic Structure of a Dockerfile
+Here's an example Dockerfile for a Python web app running on Flask:
+```
+# Step 1: Base image
+FROM python:3.9-slim
+
+# Step 2: Set working directory
+WORKDIR /app
+
+# Step 3: Copy application code to the container
+COPY . /app
+
+# Step 4: Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Step 5: Expose the application port
+EXPOSE 5000
+
+# Step 6: Define the command to run the application
+CMD ["python", "app.py"]
+```
+
+**Explanation of Each Line**
+1. Base Image:
+    -   Every Dockerfile starts with base image. 
+    -   it can be an official image or custom image also. 
+    -   The base image required a minimal environment needed your application.
+
+2. Working directory:
+    -   Create the work directory inside your container.
+    -   All subsequent commands like COPY and RUN will operate relative to this directory.
+
+3. Copy Application code to container:
+    -   Once you created work dir, you need to copy your code from host machine to container. 
+    -   Syntax: COPY source destination.
+
+4. Install dependencey:
+    -   Executes commands during the build process.
+    -   n this example, it installs Python dependencies from requirements.txt.
+
+5. Expose the application port:
+    -   Tells Docker the container will listen on a specific port (e.g., 5000).
+    -   This is for documentation and doesn't actually open the port (you still need to map it with docker run -p).
+
+6.  Command to Run the App (CMD):
+    -   Specifies the default command to run when the container starts.
+    -   For example: python app.py launches a Flask application.
+
+---
+Now we have instructions to build docker image, lets build our first image. I am going to use my another project for demo:
+
+```
+git clone https://github.com/infosecsingh/Weather-Check.git
+```
+
+#### Lets Run Build command. 
+1. Build the Image:
+Run the following in the directory containing your Dockerfile:
+```
+docker build -t weather-app:latest .
+```
+![alt text](imgs/build.png)
+
+- **build:** used for building image with dockerfile instructions.
+- **-t:** used for specify the tag, better for versioning. 
+
+#### Lets create container with image.
+```
+docker run -d -p 5000:5000 --name=weather-app weather-app
+```
+
+**You can check running containers with below command**
+```
+docker ps
+```
+#### Access your application with 5000 port on localhost
+http://localhost:5000
+![alt text](imgs/weather-app.png)
+
+#### Check Containers Stats.
+```
+docker stats 
+```
+
+#### Check container logs.
+```
+docker logs <container-id>
+```
+![alt text](imgs/docker-logs.png)
+
