@@ -1,4 +1,4 @@
-# Docker Interview based questions and anwsers 🚀
+# Docker Interview based questions🚀
 
 These questions cover advanced concepts, real-world scenarios, troubleshooting, and optimization techniques you are likely to encounter in an SRE role.
 
