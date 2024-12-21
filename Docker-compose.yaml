@@ -1,10 +1,11 @@
 services:
   flask-app: 
       build:
-        context: .
+        context: /flask-demo-app
         dockerfile: Dockerfile
-      image: "1nfosecsingh/app:latest"
+      image: "app:latest"
       container_name: "app"
       ports: 
         - "8080:5000"
+
     
