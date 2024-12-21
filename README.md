@@ -194,3 +194,26 @@ docker logs <container-id>
 ![alt text](imgs/docker-logs.png)
 
 #### Lets push our first image. 
+before pushing to dockerhub or Artifact, **tag** your image properly. 
+```
+docker tag <existing-image> <new-image-name>
+```
+For eg: 
+run docker images
+![alt text](imgs/image-tag.png)
+
+It is importment to give tag version, lets say you built 1.1version and then there are changes, then next time, you can build 1.2version. 
+```
+docker tag 1nfosecsingh/app 1nfosecsingh/weather-app:v1
+```
+make sure 1nfosecsingh is mine username of docker account, you need to replace it. 
+![alt text](imgs/image-tag-1.png)
+
+Now, lets push to dockerhub, so that anyone can use our app. 
+```
+docker push 1nfosecsingh/weather-app:v1
+```
+**image-name:tag**
+![alt text](imgs/push.png)
+![alt text](imgs/dockerhub.png)
+
