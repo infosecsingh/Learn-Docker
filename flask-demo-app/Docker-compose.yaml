@@ -1,0 +1,10 @@
+services:
+  flask-app: 
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: "1nfosecsingh/app:latest"
+      container_name: "app"
+      ports: 
+        - "8080:5000"
+    

@@ -193,3 +193,4 @@ docker logs <container-id>
 ```
 ![alt text](imgs/docker-logs.png)
 
+#### Lets push our first image. 
